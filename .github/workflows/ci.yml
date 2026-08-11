@@ -18,5 +18,13 @@ jobs:
       - name: Build
         run: echo "Building application..."
 
+  test:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
       - name: Test
         run: echo "Running tests..."
