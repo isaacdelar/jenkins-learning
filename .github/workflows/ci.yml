@@ -39,3 +39,12 @@ jobs:
 
       - name: Test artifact
         run: cat application.txt
+       - name: Check secret
+        run: |
+          if [ -n "${{ secrets.DEMO_SECRET }}" ]; then
+            echo "Secret is available"
+          else
+            echo "Secret is missing"
+            exit 1
+          fi  
+
