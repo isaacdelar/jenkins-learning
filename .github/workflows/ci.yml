@@ -18,13 +18,24 @@ jobs:
       - name: Build
         run: echo "Building application..."
 
+      - name: Create build artifact
+        run: echo "This is my application build" > application.txt
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: application-build
+          path: application.txt
+
   test:
     needs: build
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: application-build
 
-      - name: Test
-        run: echo "Running tests..."
+      - name: Test artifact
+        run: cat application.txt
